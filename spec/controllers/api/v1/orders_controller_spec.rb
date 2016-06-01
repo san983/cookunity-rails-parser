@@ -3,6 +3,9 @@ require 'rails_helper'
 module Api
   module V1
     RSpec.describe OrdersController, type: :controller do
+      # Authentication is tested in request specs
+      before(:each) { allow(controller).to receive(:authenticate) { true } }
+
       describe "GET #index" do
         it "returns http success" do
           get :index

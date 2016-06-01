@@ -61,6 +61,8 @@ class OrdersCollectJob < ApplicationJob
   end
 end
 
+# TODO
+# Move this to a proper place
 class String
   def is_i?
     /\A[-+]?\d+\z/ === self

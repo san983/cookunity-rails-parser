@@ -48,7 +48,9 @@ group :development do
 end
 
 group :test do
+  gem 'factory_girl_rails'
   gem 'guard'
+  gem 'guard-bundler'
   gem 'guard-cucumber'
   gem 'guard-rails'
   gem 'guard-rspec', '~> 4.7'

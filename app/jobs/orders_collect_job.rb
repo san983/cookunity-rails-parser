@@ -1,9 +1,11 @@
 class OrdersCollectJob < ApplicationJob
-  queue_as :default
+  queue_as :orders_collect
 
   # TODO
   # Clean this up into proper concerns / utility classes
   def perform(*args)
+    logger.info "Processing a job... #{DateTime.now} - OrdersCollectJob"
+
     # Create a new mechanize object
     mech = Mechanize.new
     mech.log = Logger.new $stderr
@@ -12,6 +14,9 @@ class OrdersCollectJob < ApplicationJob
 
     # Login into Seamless
     page = mech.get(ENV['SEAMLESS_LOGIN_URL'])
+
+    return unless page.respond_to?(:forms)
+
     login_form = page.forms[0]
     login_form["UserName"] = ENV['SEAMLESS_USER']
     login_form["Password"] = ENV['SEAMLESS_PASSWORD']

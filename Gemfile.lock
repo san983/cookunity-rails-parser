@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/sinatra/sinatra.git
+  revision: 5e9e23621c1f6abbd793b46452cb11ae8ca1277e
+  specs:
+    sinatra (2.0.0.pre.alpha)
+      mustermann (~> 0.4)
+      rack (= 2.0.0.rc1)
+      rack-protection (~> 1.5)
+      tilt (~> 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -47,6 +57,7 @@ GEM
     byebug (9.0.5)
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
+    connection_pool (2.2.0)
     cucumber (2.3.3)
       builder (>= 2.1.2)
       cucumber-core (~> 1.4.0)
@@ -128,6 +139,8 @@ GEM
     minitest (5.9.0)
     multi_json (1.12.1)
     multi_test (0.1.2)
+    mustermann (0.4.0)
+      tool (~> 0.2)
     nenv (0.3.0)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
@@ -147,6 +160,8 @@ GEM
     puma (3.4.0)
     rack (2.0.0.rc1)
       json
+    rack-protection (1.5.3)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0.rc1)
@@ -179,6 +194,9 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    redis (3.3.0)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     rspec (3.5.0.beta3)
       rspec-core (= 3.5.0.beta3)
       rspec-expectations (= 3.5.0.beta3)
@@ -200,9 +218,20 @@ GEM
       rspec-mocks (= 3.5.0.beta3)
       rspec-support (= 3.5.0.beta3)
     rspec-support (3.5.0.beta3)
+    rufus-scheduler (3.2.1)
     shellany (0.0.1)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
+    sidekiq (4.1.2)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      redis (~> 3.2, >= 3.2.1)
+    sidekiq-cron (0.4.2)
+      redis-namespace (>= 1.5.2)
+      rufus-scheduler (>= 2.0.24)
+      sidekiq (>= 4.0.0)
+    sidekiq-failures (0.4.5)
+      sidekiq (>= 2.16.0)
     slop (3.6.0)
     spring (1.7.1)
     spring-watcher-listen (2.0.0)
@@ -218,6 +247,8 @@ GEM
     terminal-notifier-guard (1.7.0)
     thor (0.19.1)
     thread_safe (0.3.5)
+    tilt (2.0.4)
+    tool (0.2.3)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unf (0.1.4)
@@ -254,6 +285,10 @@ DEPENDENCIES
   rspec-rails (= 3.5.0.beta3)
   rspec-support (= 3.5.0.beta3)
   shoulda-matchers (~> 3.1)
+  sidekiq (~> 4.0)
+  sidekiq-cron (~> 0.4.0)
+  sidekiq-failures
+  sinatra!
   spring
   spring-watcher-listen (~> 2.0.0)
   terminal-notifier-guard

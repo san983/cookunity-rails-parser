@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "Orders API", type: :request do
-  let(:orders) { FactoryGirl.create_list(:order, 2) }
+  let!(:complete_orders) { FactoryGirl.create_list(:order, 2) }
+  let!(:draft_orders) { FactoryGirl.create_list(:incomplete_order, 2) }
 
   context 'without a token' do
     describe 'GET /api/v1/orders' do
@@ -44,22 +45,27 @@ RSpec.describe "Orders API", type: :request do
       { 'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Token.encode_credentials(Rails.application.secrets.api_token) }
     end
 
-    it 'retrieves a list of orders' do
+    it 'retrieves a list of complete orders' do
       get '/api/v1/orders', env: valid_auth_token
 
       json = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(json.length).to eq(Order.count)
+      expect(json.length).to eq(complete_orders.count)
+
+      expected = complete_orders.map { |x| OrderSerializer.new(x) }
+      expect(response.body).to eq(expected.to_json)
     end
 
     it 'retrieves an specific of order' do
-      get "/api/v1/orders/#{orders.first.order_number}", env: valid_auth_token
+      order = complete_orders.first
 
-      json = JSON.parse(response.body)
+      get "/api/v1/orders/#{order.order_number}", env: valid_auth_token
 
       expect(response).to be_success
-      expect(json["id"]).to eq(orders.first.order_number)
+
+      expected = OrderSerializer.new(order)
+      expect(response.body).to eq(expected.to_json)
     end
 
     it 'retrieves an specific of order' do

@@ -5,4 +5,10 @@ class Order < ApplicationRecord
   has_one :link_info, dependent: :destroy
 
   scope :complete, -> { where(parsed: true) }
+
+  scope :from_today, -> {
+    # We need to focus just in NY timezone for defining the "today" scope
+    Time.zone = "Eastern Time (US & Canada)"
+    where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+  }
 end

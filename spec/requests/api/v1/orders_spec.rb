@@ -1,8 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "Orders API", type: :request do
-  let!(:complete_orders) { FactoryGirl.create_list(:order, 2) }
-  let!(:draft_orders) { FactoryGirl.create_list(:incomplete_order, 2) }
+  let!(:complete_orders) { create_list(:order, 2) }
+  let!(:complete_orders_from_the_past) { create_list(:order, 2, created_at: 1.day.ago) }
+  let!(:draft_orders) { create_list(:incomplete_order, 2) }
 
   context 'without a token' do
     describe 'GET /api/v1/orders' do

@@ -17,8 +17,8 @@ RSpec.describe Order, type: :model do
 
   context 'scopes' do
     describe Order, ".complete" do
-      let(:complete_orders) { FactoryGirl.create_list(:order, 2) }
-      let(:draft_orders) { FactoryGirl.create_list(:incomplete_order, 2) }
+      let(:complete_orders) { create_list(:order, 2) }
+      let(:draft_orders) { create_list(:incomplete_order, 2) }
 
       it "includes orders with parsed flag" do
         expect(Order.complete).to eq(complete_orders)
@@ -26,6 +26,20 @@ RSpec.describe Order, type: :model do
 
       it "excludes orders without parsed flag" do
         expect(Order.complete).to_not eq(draft_orders)
+      end
+    end
+
+    describe Order, ".from_today" do
+      let(:today_order) { create(:order, created_at: Time.zone.now) }
+      let(:past_order) { create(:order, created_at: 1.day.ago) }
+      let(:future_order) { create(:order, created_at: 1.day.from_now) }
+
+      it "includes orders from today" do
+        expect(Order.from_today).to eq([today_order])
+      end
+
+      it "excludes orders that are not from today" do
+        expect(Order.from_today).to_not include([past_order, future_order])
       end
     end
   end

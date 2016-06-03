@@ -14,4 +14,19 @@ RSpec.describe Order, type: :model do
     it { should validate_presence_of(:order_date) }
     it { should validate_presence_of(:order_number) }
   end
+
+  context 'scopes' do
+    describe Order, ".complete" do
+      let(:complete_orders) { FactoryGirl.create_list(:order, 2) }
+      let(:draft_orders) { FactoryGirl.create_list(:incomplete_order, 2) }
+
+      it "includes orders with parsed flag" do
+        expect(Order.complete).to eq(complete_orders)
+      end
+
+      it "excludes orders without parsed flag" do
+        expect(Order.complete).to_not eq(draft_orders)
+      end
+    end
+  end
 end

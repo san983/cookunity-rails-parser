@@ -3,4 +3,6 @@ class Order < ApplicationRecord
   validates_numericality_of :order_number, only_integer: true
 
   has_one :link_info, dependent: :destroy
+
+  scope :complete, -> { where(parsed: true) }
 end

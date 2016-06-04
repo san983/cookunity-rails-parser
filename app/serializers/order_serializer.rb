@@ -1,6 +1,10 @@
 class OrderSerializer < ActiveModel::Serializer
-  attributes :id, :user, :created, :tip, :total, :delivery_instructions,
+  attributes :id, :complete, :user, :created, :tip, :total, :delivery_instructions,
     :address, :meals
+
+  def complete
+    object.parsed
+  end
 
   def created
     object.order_date

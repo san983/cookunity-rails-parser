@@ -13,6 +13,25 @@ RSpec.describe Order, type: :model do
 
     it { should validate_presence_of(:order_date) }
     it { should validate_presence_of(:order_number) }
+
+    it { should serialize(:address) }
+    it { should serialize(:meals) }
+    it { should serialize(:user) }
+  end
+
+  context 'db columns' do
+    it { should have_db_column(:address).of_type(:text) }
+    it { should have_db_column(:delivery_fee).of_type(:decimal) }
+    it { should have_db_column(:id).of_type(:integer) }
+    it { should have_db_column(:meals).of_type(:text) }
+    it { should have_db_column(:order_date).of_type(:datetime) }
+    it { should have_db_column(:order_number).of_type(:integer) }
+    it { should have_db_column(:parsed).of_type(:boolean) }
+    it { should have_db_column(:product_total).of_type(:decimal) }
+    it { should have_db_column(:sales_tax).of_type(:decimal) }
+    it { should have_db_column(:tip).of_type(:decimal) }
+    it { should have_db_column(:total).of_type(:decimal) }
+    it { should have_db_column(:user).of_type(:text) }
   end
 
   context 'scopes' do

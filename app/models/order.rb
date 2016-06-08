@@ -2,6 +2,10 @@ class Order < ApplicationRecord
   validates :order_date, :order_number, presence: true
   validates_numericality_of :order_number, only_integer: true
 
+  serialize :address
+  serialize :meals
+  serialize :user
+
   has_one :link_info, dependent: :destroy
 
   scope :complete, -> { where(parsed: true) }

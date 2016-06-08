@@ -3,7 +3,7 @@ class OrdersCollectJob < ApplicationJob
 
   # TODO
   # Clean this up into proper concerns / utility classes
-  def perform(*args)
+  def perform
     logger.info "Processing a job... #{DateTime.now} - OrdersCollectJob"
 
     # Create a new mechanize object
@@ -34,11 +34,13 @@ class OrdersCollectJob < ApplicationJob
     # Make a bulk insert here
     order_links(links).each do |order_link|
       order = Order.find_or_initialize_by(order_number: order_link.text)
-      if order.new_record?
-        order.order_date = DateTime.now
-        order.link_info = parse_link_info(order_link.href)
-        order.save!
-      end
+      next unless order.new_record?
+
+      order.parsed = false
+      order.order_date = DateTime.now
+      order.link_info = parse_link_info(order_link.href)
+
+      OrdersDetailsCollectJob.perform_now(order.id) if order.save
     end
   end
 

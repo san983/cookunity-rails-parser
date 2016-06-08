@@ -80,7 +80,7 @@ class OrdersDetailsCollectJob < ApplicationJob
     order.address = {
       seamless_address: seamless_address_squished,
       address: seamless_address.lstrip.split("\r").first,
-      address_line_2: /(?<=(Apt\/Flat\/Suite\/Floor #:)).*? \w+/.match(seamless_address_squished).to_s,
+      address_line_2: /(?<=(Apt\/Flat\/Suite\/Floor #:)).*? \w+/.match(seamless_address_squished).to_s.squish,
       company: company,
       zipcode: zipcode,
       geolocation: 'TODO'

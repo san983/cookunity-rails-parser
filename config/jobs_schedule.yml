@@ -1,4 +1,0 @@
-orders_collect:
-  cron: "* * * * * *"
-  class: "OrdersCollectJob"
-  queue: orders_collect

@@ -15,7 +15,15 @@ Sidekiq.configure_client do |config|
 end
 
 # Sidekiq Schedule Configuration
-schedule_file = 'config/jobs_schedule.yml'
-if File.exist?(schedule_file) && Sidekiq.server?
-  Sidekiq::Cron::Job.load_from_hash(YAML.load_file(schedule_file))
+if Sidekiq.server?
+  # Runs every each minute by default if ORDERS_COLLECT_JOB_SCHEDULE is not set
+  schedule = {
+    'orders_collect' =>
+    {
+      'cron' => ENV.fetch('ORDERS_COLLECT_JOB_SCHEDULE', '* * * * * *'),
+      'class' => 'OrdersCollectJob',
+      'queue' => 'orders_collect'
+    }
+  }
+  Sidekiq::Cron::Job.load_from_hash(schedule)
 end

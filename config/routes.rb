@@ -1,4 +1,5 @@
 require 'sidekiq/web'
+require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
   # This is for Amazon Elastic Load Balancer / NewRelic health checks

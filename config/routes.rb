@@ -13,4 +13,7 @@ Rails.application.routes.draw do
   end
 
   mount Sidekiq::Web, at: '/sidekiq'
+
+  root 'status#nothing'
+  get '*path', to: "status#nothing"
 end

@@ -10,4 +10,13 @@ RSpec.describe StatusController, type: :controller do
       expect(response.body).to eq("2016xxxx")
     end
   end
+
+  describe "GET #nothing" do
+    it "returns nothing" do
+      get :nothing
+
+      expect(response).to have_http_status(:not_found)
+      expect(response.body).to be_empty
+    end
+  end
 end

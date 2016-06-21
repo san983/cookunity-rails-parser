@@ -3,11 +3,12 @@ class OrdersDetailsCollectJob < ApplicationJob
 
   # TODO
   # Clean this up into proper concerns / utility classes
-  def perform(order_id)
+  def perform(order_id, force_parse = false)
     logger.info "Processing a job... #{DateTime.now} - OrdersDetailsCollectJob"
 
     order = Order.find(order_id)
-    return unless order.present? && !order.parsed && order.link_info.present?
+    return unless order.present? && order.link_info.present?
+    return if (order.parsed || !force_parse)
 
     # Create a new mechanize object
     mech = Mechanize.new
@@ -28,9 +29,17 @@ class OrdersDetailsCollectJob < ApplicationJob
     end
 
     # delivery instructions
-    page.css(".ecotogo").each do |item|
-      order.delivery_instructions = item.text.strip
+    order.delivery_instructions = ""
+
+    page.css("#Table1 div.fontSmallBlackBold p").each do |item|
+      order.delivery_instructions << (item.text.strip + " ")
     end
+
+    page.css(".ecotogo").each do |item|
+      order.delivery_instructions << (item.text.strip + " ")
+    end
+
+    order.delivery_instructions.rstrip!
 
     # Product Total
     page.css("#ProductTotal").each do |item|

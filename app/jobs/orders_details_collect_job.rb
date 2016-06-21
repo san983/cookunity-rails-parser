@@ -7,8 +7,11 @@ class OrdersDetailsCollectJob < ApplicationJob
     logger.info "Processing a job... #{DateTime.now} - OrdersDetailsCollectJob"
 
     order = Order.find_by_id(order_id)
-    return if order.nil? || order.link_info.blank?
-    return if (order.parsed || !force_parse)
+    return if order.nil? || order.link_info.nil?
+
+    unless force_parse
+      return if order.parsed?
+    end
 
     # Create a new mechanize object
     mech = Mechanize.new

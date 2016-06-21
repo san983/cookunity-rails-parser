@@ -85,9 +85,12 @@ class OrdersDetailsCollectJob < ApplicationJob
     }
 
     # address
-    seamless_address = page.css('#Table1 .bold p')[2].text
+    address_field_size = page.css('#Table1 .bold p').count
+    address_field_size = address_field_size == 0 ? 1 : address_field_size
+
+    seamless_address = page.css('#Table1 .bold p')[address_field_size - 1].text
     seamless_address_squished = seamless_address.squish
-    company = page.css('#Table1 .bold p')[1].text.squish
+    company = address_field_size > 2 ? page.css('#Table1 .bold p')[1].text.squish : ""
     zipcode = /[0-9]{5}/.match(page.css('#Table1 .bold p').text.squish).to_s
     order.address = {
       seamless_address: seamless_address_squished,

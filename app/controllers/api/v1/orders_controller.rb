@@ -3,7 +3,7 @@ module Api
     class OrdersController < ApiController
       # GET /v1/orders
       def index
-        render json: Order.complete.from_today
+        render json: Order.from_today
       end
 
       # GET /v1/orders/:id

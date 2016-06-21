@@ -46,15 +46,17 @@ RSpec.describe "Orders API", type: :request do
       { 'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Token.encode_credentials(Rails.application.secrets.api_token) }
     end
 
-    it 'retrieves a list of complete orders' do
+    it 'retrieves a list of orders from today' do
       get '/api/v1/orders', env: valid_auth_token
 
       json = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(json.length).to eq(complete_orders.count)
 
-      expected = complete_orders.map { |x| OrderSerializer.new(x) }
+      expected_orders = complete_orders + draft_orders
+      expect(json.length).to eq(expected_orders.count)
+
+      expected = expected_orders.map { |x| OrderSerializer.new(x) }
       expect(response.body).to eq(expected.to_json)
     end
 

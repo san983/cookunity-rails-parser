@@ -6,8 +6,8 @@ class OrdersDetailsCollectJob < ApplicationJob
   def perform(order_id, force_parse = false)
     logger.info "Processing a job... #{DateTime.now} - OrdersDetailsCollectJob"
 
-    order = Order.find(order_id)
-    return unless order.present? && order.link_info.present?
+    order = Order.find_by_id(order_id)
+    return if order.nil? || order.link_info.blank?
     return if (order.parsed || !force_parse)
 
     # Create a new mechanize object

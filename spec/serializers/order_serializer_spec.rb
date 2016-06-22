@@ -8,6 +8,11 @@ RSpec.describe OrderSerializer, type: :serializer do
     expect(serializer).to_not be_nil
   end
 
+  it 'serializes the parsed & failed_parsing fields' do
+    expect(serializer.complete).to eq order.parsed
+    expect(serializer.error).to eq order.failed_parsing
+  end
+
   it 'serializes the id, complete & delivery_instructions' do
     expect(serializer.id).to eq order.order_number
     expect(serializer.complete).to eq order.parsed

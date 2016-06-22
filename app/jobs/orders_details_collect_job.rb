@@ -102,7 +102,10 @@ class OrdersDetailsCollectJob < ApplicationJob
     }
 
     order.parsed = true
+    order.failed_parsing = false
     order.save!
+  rescue Error
+    order.update_attributes!(failed_parsing: true) if order
   end
 
   private

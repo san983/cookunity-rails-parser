@@ -9,6 +9,8 @@ RSpec.describe Order, type: :model do
     it { should allow_value(123).for(:order_number) }
     it { should allow_value(DateTime.now).for(:order_date) }
 
+    it { should validate_inclusion_of(:failed_parsing).in?([false, true]) }
+
     it { should validate_numericality_of(:order_number).only_integer }
 
     it { should validate_presence_of(:order_date) }

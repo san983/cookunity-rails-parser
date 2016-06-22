@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  validates :failed_parsing, inclusion: { in: [true, false] }
   validates :order_date, :order_number, presence: true
   validates_numericality_of :order_number, only_integer: true
 

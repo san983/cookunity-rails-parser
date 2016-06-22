@@ -1,9 +1,13 @@
 class OrderSerializer < ActiveModel::Serializer
   attributes :id, :complete, :user, :created, :product_total, :sales_tax, :delivery_fee, :tip, :total, :delivery_instructions,
-    :address, :meals
+    :address, :meals, :failed_parsing
 
   def complete
     object.parsed
+  end
+
+  def error
+    object.failed_parsing
   end
 
   def created

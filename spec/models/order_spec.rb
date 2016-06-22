@@ -63,5 +63,21 @@ RSpec.describe Order, type: :model do
         expect(Order.from_today).to_not include([past_order, future_order])
       end
     end
+
+    describe Order, ".from_date" do
+      let(:today_order) { create(:order, created_at: Time.zone.now) }
+      let(:past_order) { create(:order, created_at: 1.day.ago) }
+      let(:future_order) { create(:order, created_at: 1.day.from_now) }
+
+      it "includes orders from today" do
+        expect(Order.from_date(today_order.created_at.strftime('%F'))).to eq([today_order])
+      end
+
+      it "excludes orders that are not from today" do
+        expect(Order.from_date(past_order.created_at.strftime('%F'))).to eq([past_order])
+        expect(Order.from_date(future_order.created_at.strftime('%F'))).to eq([future_order])
+      end
+    end
+
   end
 end

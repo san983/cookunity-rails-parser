@@ -60,6 +60,19 @@ RSpec.describe "Orders API", type: :request do
       expect(response.body).to eq(expected.to_json)
     end
 
+    it 'retrieves a list of orders from yesterday' do
+      get '/api/v1/orders?date=' + 1.day.ago.strftime('%F') , env: valid_auth_token
+
+      json = JSON.parse(response.body)
+
+      expect(response).to be_success
+
+      expect(json.length).to eq(complete_orders_from_the_past.count)
+
+      expected = complete_orders_from_the_past.map { |x| OrderSerializer.new(x) }
+      expect(response.body).to eq(expected.to_json)
+    end
+
     it 'retrieves an specific of order' do
       order = complete_orders.first
 

@@ -3,7 +3,13 @@ module Api
     class OrdersController < ApiController
       # GET /v1/orders
       def index
-        render json: Order.from_today
+        orders = if params[:date].present?
+                   Order.from_date(params[:date])
+                 else
+                   Order.from_today
+                 end
+
+        render json: orders
       end
 
       # GET /v1/orders/:id

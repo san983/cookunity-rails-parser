@@ -3,7 +3,7 @@ ruby '2.3.1'
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '>= 5.0.0.rc1', '< 5.1'
+gem 'rails', '~> 5.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -38,12 +38,12 @@ group :development, :test do
 
   gem 'dotenv-rails'
 
-  gem 'rspec', '= 3.5.0.beta3'
-  gem 'rspec-core', '= 3.5.0.beta3'
-  gem 'rspec-expectations', '= 3.5.0.beta3'
-  gem 'rspec-mocks', '= 3.5.0.beta3'
-  gem 'rspec-rails', '= 3.5.0.beta3'
-  gem 'rspec-support', '= 3.5.0.beta3'
+  gem 'rspec'
+  gem 'rspec-core'
+  gem 'rspec-expectations'
+  gem 'rspec-mocks'
+  gem 'rspec-rails'
+  gem 'rspec-support'
 end
 
 group :development do

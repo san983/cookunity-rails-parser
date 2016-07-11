@@ -91,7 +91,7 @@ class OrdersDetailsCollectJob < ApplicationJob
     seamless_address = page.css('#Table1 .bold p')[address_field_size - 1].text
     seamless_address_squished = seamless_address.squish
     company = address_field_size > 2 ? page.css('#Table1 .bold p')[1].text.squish : ""
-    zipcode = /[0-9]{5}/.match(page.css('#Table1 .bold p').text.squish).to_s
+    zipcode = page.css('#Table1 .bold p').text.squish.scan(/[0-9]{5}/).try(:last)
     order.address = {
       seamless_address: seamless_address_squished,
       address: seamless_address.lstrip.split("\r").first,

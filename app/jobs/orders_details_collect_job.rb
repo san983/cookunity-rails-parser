@@ -91,7 +91,19 @@ class OrdersDetailsCollectJob < ApplicationJob
     seamless_address = page.css('#Table1 .bold p')[address_field_size - 1].text
     seamless_address_squished = seamless_address.squish
     company = address_field_size > 2 ? page.css('#Table1 .bold p')[1].text.squish : ""
-    zipcode = page.css('#Table1 .bold p').text.squish.scan(/ [0-9]{5} /).try(:first).try(:squish)
+
+    zipcode_raw = page.css('#Table1 .bold p').text
+    zipcode = "NOZIP"
+
+    if zipcode_raw
+      zipcode = zipcode_raw.scan(/[0-9]{5}-[0-9]{4}/).try(:first).try(:to_s)
+
+      unless zipcode
+        zipcode = zipcode_raw.scan(/[^0-9][0-9]{5}[^0-9]/).try(:first).try(:to_s)
+        zipcode = zipcode.gsub(/\D/, '')
+      end
+    end
+
     order.address = {
       seamless_address: seamless_address_squished,
       address: seamless_address.lstrip.split("\r").first,

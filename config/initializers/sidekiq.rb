@@ -17,12 +17,19 @@ end
 # Sidekiq Schedule Configuration
 if Sidekiq.server?
   # Runs every each minute by default if ORDERS_COLLECT_JOB_SCHEDULE is not set
+  # Runs once a day by default if DELETE_OLD_ORDERS_JOB_SCHEDULE is not set
   schedule = {
     'orders_collect' =>
     {
       'cron' => ENV.fetch('ORDERS_COLLECT_JOB_SCHEDULE', '* * * * * *'),
       'class' => 'OrdersCollectJob',
       'queue' => 'orders_collect'
+    },
+    'delete_orders_collect' =>
+    {
+      'cron' => ENV.fetch('DELETE_OLD_ORDERS_JOB_SCHEDULE', '0 0 * * * *'),
+      'class' => 'DeleteOldOrdersJob',
+      'queue' => 'delete_orders_collect'
     }
   }
   Sidekiq::Cron::Job.load_from_hash(schedule)

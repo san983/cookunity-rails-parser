@@ -14,6 +14,6 @@ class DeleteOldOrdersJob < ApplicationJob
   private
 
   def get_old_orders
-    Order.where("created_at < ?", DateTime.now - 3.month)
+    Order.where("created_at < ?", DateTime.now - 2.month)
   end
 end

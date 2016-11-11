@@ -30,7 +30,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'sidekiq', '~> 4.0'
 gem 'sidekiq-failures'
 gem 'sidekiq-cron', '~> 0.4.0'
-gem 'sinatra', github: 'sinatra/sinatra', require: false
+gem 'sinatra', git: 'https://github.com/sinatra/sinatra', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

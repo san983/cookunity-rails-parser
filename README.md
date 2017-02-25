@@ -1,1 +1,1 @@
-Check the [Wiki](../../wiki)
+Check the [Wiki](../../wiki)!

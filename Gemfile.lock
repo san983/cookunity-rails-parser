@@ -1,13 +1,13 @@
 GIT
   remote: https://github.com/sinatra/sinatra
-  revision: 32f416c7b8e5131247dadee4ac848ac42c43c761
+  revision: 34521720b6028c2fa696cf85109345a89f306c99
   specs:
-    rack-protection (2.0.0.beta2)
+    rack-protection (2.0.0.rc2)
       rack
-    sinatra (2.0.0.beta2)
-      mustermann (= 1.0.0.beta2)
+    sinatra (2.0.0.rc2)
+      mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.0.beta2)
+      rack-protection (= 2.0.0.rc2)
       tilt (~> 2.0)
 
 GEM
@@ -36,11 +36,11 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    active_model_serializers (0.10.4)
+    active_model_serializers (0.10.5)
       actionpack (>= 4.1, < 6)
       activemodel (>= 4.1, < 6)
       case_transform (>= 0.2)
-      jsonapi (= 0.1.1.beta6)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.2)
     activejob (5.0.2)
       activesupport (= 5.0.2)
       globalid (>= 0.3.6)
@@ -82,14 +82,16 @@ GEM
       dotenv (= 2.2.0)
       railties (>= 3.2, < 5.1)
     erubis (2.7.0)
+    et-orbi (1.0.2)
+      tzinfo
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.8.0)
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
-    ffi (1.9.17)
+    ffi (1.9.18)
     formatador (0.2.5)
-    gherkin (4.0.0)
+    gherkin (4.1.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     guard (2.14.1)
@@ -119,12 +121,8 @@ GEM
       rspec (>= 2.99.0, < 4.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    i18n (0.7.0)
-    jsonapi (0.1.1.beta6)
-      jsonapi-parser (= 0.1.1.beta3)
-      jsonapi-renderer (= 0.1.1.beta1)
-    jsonapi-parser (0.1.1.beta3)
-    jsonapi-renderer (0.1.1.beta1)
+    i18n (0.8.1)
+    jsonapi-renderer (0.1.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -151,29 +149,29 @@ GEM
     minitest (5.10.1)
     monetize (1.6.0)
       money (~> 6.8)
-    money (6.8.1)
-      i18n (>= 0.6.4, <= 0.7.0)
+    money (6.8.2)
+      i18n (>= 0.6.4, < 0.9)
       sixarm_ruby_unaccent (>= 1.1.1, < 2)
     multi_json (1.12.1)
     multi_test (0.1.2)
-    mustermann (1.0.0.beta2)
+    mustermann (1.0.0)
     nenv (0.3.0)
     net-http-digest_auth (1.4.1)
     net-http-persistent (2.9.4)
-    newrelic_rpm (3.18.1.330)
+    newrelic_rpm (4.0.0.332)
     nio4r (2.0.0)
-    nokogiri (1.7.0.1)
+    nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
     ntlm-http (0.1.1)
-    pg (0.19.0)
+    pg (0.20.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    puma (3.7.1)
+    puma (3.8.2)
     rack (2.0.1)
     rack-cors (0.4.1)
     rack-test (0.6.3)
@@ -230,12 +228,12 @@ GEM
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
     ruby_dep (1.5.0)
-    rufus-scheduler (3.3.4)
-      tzinfo
+    rufus-scheduler (3.4.0)
+      et-orbi (~> 1.0)
     shellany (0.0.1)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
-    sidekiq (4.2.9)
+    sidekiq (4.2.10)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
@@ -263,8 +261,8 @@ GEM
     terminal-notifier-guard (1.7.0)
     thor (0.19.4)
     thread_safe (0.3.6)
-    tilt (2.0.6)
-    tzinfo (1.2.2)
+    tilt (2.0.7)
+    tzinfo (1.2.3)
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
@@ -311,7 +309,7 @@ DEPENDENCIES
   terminal-notifier-guard
 
 RUBY VERSION
-   ruby 2.3.3p222
+   ruby 2.3.4p301
 
 BUNDLED WITH
-   1.14.5
+   1.14.6

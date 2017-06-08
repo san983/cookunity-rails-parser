@@ -15,32 +15,32 @@ ActiveRecord::Schema.define(version: 20160621235300) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "link_infos", force: :cascade do |t|
-    t.integer  "order_id"
-    t.integer  "vendor_location_id"
-    t.string   "token"
-    t.boolean  "auto_print",         default: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+  create_table "link_infos", id: :serial, force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "vendor_location_id"
+    t.string "token"
+    t.boolean "auto_print", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.integer  "order_number"
-    t.text     "user"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+  create_table "orders", id: :serial, force: :cascade do |t|
+    t.integer "order_number"
+    t.text "user"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.datetime "order_date"
-    t.boolean  "parsed",                default: false
-    t.text     "meals"
-    t.string   "delivery_instructions"
-    t.decimal  "tip"
-    t.decimal  "total"
-    t.text     "address"
-    t.decimal  "product_total"
-    t.decimal  "sales_tax"
-    t.decimal  "delivery_fee"
-    t.boolean  "failed_parsing",        default: false
-    t.index ["order_number"], name: "index_orders_on_order_number", using: :btree
+    t.boolean "parsed", default: false
+    t.text "meals"
+    t.string "delivery_instructions"
+    t.decimal "tip"
+    t.decimal "total"
+    t.text "address"
+    t.decimal "product_total"
+    t.decimal "sales_tax"
+    t.decimal "delivery_fee"
+    t.boolean "failed_parsing", default: false
+    t.index ["order_number"], name: "index_orders_on_order_number"
   end
 
 end

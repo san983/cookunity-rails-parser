@@ -3,7 +3,7 @@ class OrdersDetailsCollectJob < ApplicationJob
 
   # TODO
   # Clean this up into proper concerns / utility classes
-  def perform(order_id, force_parse = false)
+  def perform(seamless_user_id, order_id, force_parse = false)
     logger.info "Processing a job... #{DateTime.now} - OrdersDetailsCollectJob"
 
     order = Order.find_by_id(order_id)
@@ -20,7 +20,7 @@ class OrdersDetailsCollectJob < ApplicationJob
     mech.user_agent_alias = ["Linux Firefox", "Mac Mozilla", "Mac Safari"].sample
 
     # Login into Seamless
-    page = mech.get(order_detail_url(order))
+    page = mech.get(seamless_user_id, order_detail_url(order))
 
     # return unless page.respond_to?(:forms)
 
@@ -141,8 +141,7 @@ class OrdersDetailsCollectJob < ApplicationJob
     }
   end
 
-  def order_detail_url(order)
-    user_id = 8_947_152
-    "https://www.seamless.com/OrderView.m?orderId=#{order.order_number}&vendorLocationId=#{order.link_info.vendor_location_id}&autoPrint=False&view=internal&viewReceiptFromDetailReport=False&interface=Vendor&userID=#{user_id}&Token=#{order.link_info.token}"
+  def order_detail_url(seamless_user_id, order)
+    "https://www.seamless.com/OrderView.m?orderId=#{order.order_number}&vendorLocationId=#{order.link_info.vendor_location_id}&autoPrint=False&view=internal&viewReceiptFromDetailReport=False&interface=Vendor&userID=#{seamless_user_id}&Token=#{order.link_info.token}"
   end
 end

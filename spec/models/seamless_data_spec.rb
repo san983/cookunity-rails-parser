@@ -5,6 +5,7 @@ RSpec.describe SeamlessData, type: :model do
     seamlessData = SeamlessData.new(1)
 
     expect(seamlessData.username).to be_kind_of(String)
+    expect(seamlessData.seamless_user_id).to be_kind_of(String)
     expect(seamlessData.password).to be_kind_of(String)
     expect(seamlessData.loginUrl).to be_kind_of(String)
     expect(seamlessData.oldOrdersUrl).to be_kind_of(String)

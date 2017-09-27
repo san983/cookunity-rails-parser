@@ -8,9 +8,9 @@ class OrdersCollectJob < ApplicationJob
     seamless_user = args.first.to_i
 
     seamlessData = SeamlessData.new(seamless_user)
+    seamless_user_id = seamlessData.seamless_user_id
 
     text = "**** Processing a job for #{seamlessData.username} at #{DateTime.now} - OrdersCollectJob #{seamless_user}\n ****"
-    puts text
     logger.info text
 
     # Create a new mechanize object
@@ -48,7 +48,7 @@ class OrdersCollectJob < ApplicationJob
       order.order_date = DateTime.now
       order.link_info = parse_link_info(order_link.href)
 
-      OrdersDetailsCollectJob.perform_now(order.id) if order.save
+      OrdersDetailsCollectJob.perform_now(seamless_user_id, order.id) if order.save
     end
   end
 

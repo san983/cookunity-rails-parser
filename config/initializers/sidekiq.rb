@@ -7,11 +7,11 @@ end
 
 # Sidekiq Redis Server Configuration
 Sidekiq.configure_server do |config|
-  config.redis = { size: 27, url: ENV.fetch('REDISCLOUD_URL') { 'redis://0.0.0.0:6379' } }
+  config.redis = { size: ENV.fetch('REDIS_CONNECTIONS_SIZE').to_i { 27 }, url: ENV.fetch('REDISCLOUD_URL') { 'redis://0.0.0.0:6379' } }
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { size: 27, url: ENV.fetch('REDISCLOUD_URL') { 'redis://0.0.0.0:6379' } }
+  config.redis = { size: ENV.fetch('REDIS_CONNECTIONS_SIZE').to_i { 27 }, url: ENV.fetch('REDISCLOUD_URL') { 'redis://0.0.0.0:6379' } }
 end
 
 # Sidekiq Schedule Configuration

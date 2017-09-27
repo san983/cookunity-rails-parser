@@ -5,7 +5,7 @@ class OrdersCollectJob < ApplicationJob
   # Clean this up into proper concerns / utility classes
   def perform(*args)
     seamless_user = args.first.to_i
-    return if seamless_user
+    return unless seamless_user
 
     seamlessData = SeamlessData.new(seamless_user)
 

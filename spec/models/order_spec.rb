@@ -9,6 +9,8 @@ RSpec.describe Order, type: :model do
     it { should allow_value(123).for(:order_number) }
     it { should allow_value(DateTime.now).for(:order_date) }
 
+    it { should allow_value("someone").for(:account) }
+
     it { should validate_inclusion_of(:failed_parsing).in?([false, true]) }
 
     it { should validate_numericality_of(:order_number).only_integer }
@@ -34,6 +36,7 @@ RSpec.describe Order, type: :model do
     it { should have_db_column(:tip).of_type(:decimal) }
     it { should have_db_column(:total).of_type(:decimal) }
     it { should have_db_column(:user).of_type(:text) }
+    it { should have_db_column(:account).of_type(:string) }
   end
 
   context 'scopes' do

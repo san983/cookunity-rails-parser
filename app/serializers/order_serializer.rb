@@ -1,6 +1,6 @@
 class OrderSerializer < ActiveModel::Serializer
   attributes :id, :complete, :user, :created, :product_total, :sales_tax, :delivery_fee, :tip, :total, :delivery_instructions,
-    :address, :meals, :error
+    :address, :meals, :error, :account
 
   def complete
     object.parsed
@@ -16,6 +16,10 @@ class OrderSerializer < ActiveModel::Serializer
 
   def id
     object.order_number
+  end
+
+  def account
+    object.account
   end
 
   def user

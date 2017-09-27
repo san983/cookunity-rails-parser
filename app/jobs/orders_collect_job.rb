@@ -4,7 +4,9 @@ class OrdersCollectJob < ApplicationJob
   # TODO
   # Clean this up into proper concerns / utility classes
   def perform
-    logger.info "Processing a job... #{DateTime.now} - OrdersCollectJob"
+    seamlessData = SeamlessData.new
+
+    logger.info "Processing a job for #{seamlessData.username} at #{DateTime.now} - OrdersCollectJob"
 
     # Create a new mechanize object
     mech = Mechanize.new
@@ -13,17 +15,19 @@ class OrdersCollectJob < ApplicationJob
     mech.user_agent_alias = ["Linux Firefox", "Mac Mozilla", "Mac Safari"].sample
 
     # Login into Seamless
-    page = mech.get(ENV['SEAMLESS_LOGIN_URL'])
+    page = mech.get(seamlessData.loginUrl)
 
     return unless page.respond_to?(:forms)
 
     login_form = page.forms[0]
-    login_form["UserName"] = ENV['SEAMLESS_USER']
-    login_form["Password"] = ENV['SEAMLESS_PASSWORD']
+    # login_form["UserName"] = ENV['SEAMLESS_USER']
+    login_form["UserName"] = seamlessData.username
+    # login_form["Password"] = ENV['SEAMLESS_PASSWORD']
+    login_form["Password"] = seamlessData.password
     login_form.submit
 
     # Go to Old Orders Page
-    old_orders_page = mech.get(ENV['SEAMLESS_OLD_ORDERS_URL'])
+    old_orders_page = seamlessData.oldOrdersUrl
 
     # Parse links
     links = old_orders_page.links
@@ -36,6 +40,7 @@ class OrdersCollectJob < ApplicationJob
       order = Order.find_or_initialize_by(order_number: order_link.text)
       next unless order.new_record?
 
+      order.account = seamlessData.username
       order.parsed = false
       order.order_date = DateTime.now
       order.link_info = parse_link_info(order_link.href)

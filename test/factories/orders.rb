@@ -12,6 +12,7 @@ FactoryGirl.define do
     tip 2.30
     total 17.94
     sequence(:user) { |n| { name: "John #{n} Doe", first_name: "John", last_name: "Doe", phone: "(564) 839-3450" } }
+    account "AccountName"
 
     factory :incomplete_order do
       parsed false

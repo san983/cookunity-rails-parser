@@ -4,8 +4,8 @@ class OrdersCollectJob < ApplicationJob
   # TODO
   # Clean this up into proper concerns / utility classes
   def perform(*args)
+    return unless args && args.first
     seamless_user = args.first.to_i
-    return unless seamless_user
 
     seamlessData = SeamlessData.new(seamless_user)
 

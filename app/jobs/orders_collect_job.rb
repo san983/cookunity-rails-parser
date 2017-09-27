@@ -25,14 +25,12 @@ class OrdersCollectJob < ApplicationJob
     return unless page.respond_to?(:forms)
 
     login_form = page.forms[0]
-    # login_form["UserName"] = ENV['SEAMLESS_USER']
     login_form["UserName"] = seamlessData.username
-    # login_form["Password"] = ENV['SEAMLESS_PASSWORD']
     login_form["Password"] = seamlessData.password
     login_form.submit
 
     # Go to Old Orders Page
-    old_orders_page = seamlessData.oldOrdersUrl
+    old_orders_page = mech.get(seamlessData.oldOrdersUrl)
 
     # Parse links
     links = old_orders_page.links

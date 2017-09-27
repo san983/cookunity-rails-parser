@@ -19,11 +19,26 @@ if Sidekiq.server?
   # Runs every each minute by default if ORDERS_COLLECT_JOB_SCHEDULE is not set
   # Runs once a day by default if DELETE_OLD_ORDERS_JOB_SCHEDULE is not set
   schedule = {
-    'orders_collect' =>
+    'orders_collect_1' =>
     {
       'cron' => ENV.fetch('ORDERS_COLLECT_JOB_SCHEDULE', '* * * * * *'),
       'class' => 'OrdersCollectJob',
-      'queue' => 'orders_collect'
+      'queue' => 'orders_collect',
+      'args' => '[1]'
+    },
+    'orders_collect_2' =>
+    {
+      'cron' => ENV.fetch('ORDERS_COLLECT_JOB_SCHEDULE', '* * * * * *'),
+      'class' => 'OrdersCollectJob',
+      'queue' => 'orders_collect',
+      'args' => '[2]'
+    },
+    'orders_collect_3' =>
+    {
+      'cron' => ENV.fetch('ORDERS_COLLECT_JOB_SCHEDULE', '* * * * * *'),
+      'class' => 'OrdersCollectJob',
+      'queue' => 'orders_collect',
+      'args' => '[3]'
     },
     'delete_orders_collect' =>
     {

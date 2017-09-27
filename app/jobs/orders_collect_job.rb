@@ -3,10 +3,15 @@ class OrdersCollectJob < ApplicationJob
 
   # TODO
   # Clean this up into proper concerns / utility classes
-  def perform
-    seamlessData = SeamlessData.new
+  def perform(*args)
+    seamless_user = args.first.to_i
+    return if seamless_user
 
-    logger.info "Processing a job for #{seamlessData.username} at #{DateTime.now} - OrdersCollectJob"
+    seamlessData = SeamlessData.new(seamless_user)
+
+    text = "**** Processing a job for #{seamlessData.username} at #{DateTime.now} - OrdersCollectJob #{seamless_user}\n ****"
+    puts text
+    logger.info text
 
     # Create a new mechanize object
     mech = Mechanize.new

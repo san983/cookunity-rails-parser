@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SeamlessData, type: :model do
   it "initializes an object with defaults" do
-    seamlessData = SeamlessData.new
+    seamlessData = SeamlessData.new(1)
 
     expect(seamlessData.username).to be_kind_of(String)
     expect(seamlessData.password).to be_kind_of(String)

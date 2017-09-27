@@ -20,7 +20,7 @@ class OrdersDetailsCollectJob < ApplicationJob
     mech.user_agent_alias = ["Linux Firefox", "Mac Mozilla", "Mac Safari"].sample
 
     # Login into Seamless
-    page = mech.get(seamless_user_id, order_detail_url(order))
+    page = mech.get(order_detail_url(seamless_user_id, order))
 
     # return unless page.respond_to?(:forms)
 

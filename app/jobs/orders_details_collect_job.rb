@@ -102,7 +102,7 @@ class OrdersDetailsCollectJob < ApplicationJob
         zipcode = zipcode.first(5)
       else
         zipcode = zipcode_raw.scan(/[^0-9][0-9]{5}[^0-9]/).try(:first).try(:to_s)
-        zipcode = zipcode.gsub(/\D/, '')
+        zipcode = zipcode ? zipcode.gsub(/\D/, '') : ''
       end
     end
 

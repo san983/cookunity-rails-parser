@@ -47,6 +47,13 @@ if Sidekiq.server?
       'queue' => 'orders_collect',
       'args' => '[4]'
     },
+    'orders_collect_5' =>
+    {
+      'cron' => ENV.fetch('ORDERS_COLLECT_JOB_SCHEDULE', '* * * * * *'),
+      'class' => 'OrdersCollectJob',
+      'queue' => 'orders_collect',
+      'args' => '[5]'
+    },
     'delete_orders_collect' =>
     {
       'cron' => ENV.fetch('DELETE_OLD_ORDERS_JOB_SCHEDULE', '0 0 * * * *'),

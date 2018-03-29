@@ -6,7 +6,7 @@ RSpec.describe StatusController, type: :controller do
       allow(ActiveRecord::Migrator).to receive_messages(current_version: "2016xxxx")
       get :show
 
-      expect(response).to have_http_status(:success)
+      expect(response).to be_successful
       expect(response.body).to eq("2016xxxx")
     end
   end

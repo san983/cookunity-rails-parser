@@ -9,12 +9,12 @@ module Api
       describe "GET #index" do
         it "returns http success" do
           get :index
-          expect(response).to have_http_status(:success)
+          expect(response).to be_successful
         end
 
         it "returns http success with date param" do
           get :index, params: { date: DateTime.now.strftime('%F') }
-          expect(response).to have_http_status(:success)
+          expect(response).to be_successful
         end
       end
 
@@ -31,7 +31,7 @@ module Api
 
           get :show, params: { id: 1 }
 
-          expect(response).to have_http_status(:success)
+          expect(response).to be_successful
         end
       end
     end

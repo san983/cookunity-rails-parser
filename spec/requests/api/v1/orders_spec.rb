@@ -51,7 +51,7 @@ RSpec.describe "Orders API", type: :request do
 
       json = JSON.parse(response.body)
 
-      expect(response).to be_success
+      expect(response).to be_successful
 
       expected_orders = complete_orders + draft_orders
       expect(json.length).to eq(expected_orders.count)
@@ -65,7 +65,7 @@ RSpec.describe "Orders API", type: :request do
 
       json = JSON.parse(response.body)
 
-      expect(response).to be_success
+      expect(response).to be_successful
 
       expect(json.length).to eq(complete_orders_from_the_past.count)
 
@@ -78,7 +78,7 @@ RSpec.describe "Orders API", type: :request do
 
       get "/api/v1/orders/#{order.order_number}", env: valid_auth_token
 
-      expect(response).to be_success
+      expect(response).to be_successful
 
       expected = OrderSerializer.new(order)
       expect(response.body).to eq(expected.to_json)

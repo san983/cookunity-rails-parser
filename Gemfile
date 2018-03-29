@@ -1,11 +1,11 @@
-ruby '2.4.2'
+ruby '2.5.1'
 
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.0'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.18'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -27,7 +27,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'rack-cors', require: 'rack/cors'
 
 # Sidekiq
-gem 'sidekiq', '~> 4.0'
+gem 'sidekiq' #, '~> 4.0'
 gem 'sidekiq-failures'
 gem 'sidekiq-cron'
 gem 'sinatra'
@@ -55,7 +55,7 @@ group :development do
 end
 
 group :test do
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-cucumber'

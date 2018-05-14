@@ -1,0 +1,62 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/cancel_meals": {
+      "post": {
+        "summary": "Creates a cancel meal job",
+        "security": [
+          {
+            "Token": {
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cancel_meal",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meal": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cancel_meal"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Cancel meal job created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Invalid Token"
+          },
+          "422": {
+            "description": "invalid request"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Token": {
+      "description": "...",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

@@ -97,6 +97,7 @@ guard :rspec, cmd: "bundle exec rspec", all_on_start: true do
       rspec.spec.call("controllers/#{m[1]}_controller"),
       rspec.spec.call("acceptance/#{m[1]}"),
       rspec.spec.call("requests/#{m[1]}"),
+      rspec.spec.call("integration/#{m[1]}"),
     ]
   end
 

@@ -15,11 +15,13 @@ gem 'puma', '~> 3.7'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'bootsnap'
+gem 'bootsnap', require: false
 
 gem 'newrelic_rpm'
 
 gem 'active_model_serializers', '~> 0.10.0'
+
+gem 'rswag'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -29,7 +31,8 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'rack-cors', require: 'rack/cors'
 
 # Sidekiq
-gem 'sidekiq' #, '~> 4.0'
+
+gem 'sidekiq', '~> 5.0'
 gem 'sidekiq-failures'
 gem 'sidekiq-cron'
 gem 'sinatra'

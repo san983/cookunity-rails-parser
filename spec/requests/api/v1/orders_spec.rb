@@ -7,14 +7,14 @@ RSpec.describe "Orders API", type: :request do
 
   context 'without a token' do
     describe 'GET /api/v1/orders' do
-      it 'retrieves a list of orders' do
+      it 'responds unauthorized' do
         get "/api/v1/orders"
         expect(response).to be_unauthorized
       end
     end
 
     describe 'GET /api/v1/orders/1' do
-      it 'retrieves an specific of order' do
+      it 'responds unauthorized' do
         get "/api/v1/orders/1"
         expect(response).to be_unauthorized
       end

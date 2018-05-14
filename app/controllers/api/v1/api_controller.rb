@@ -3,6 +3,10 @@ module Api::V1
     include ActionController::HttpAuthentication::Token::ControllerMethods
     before_action :authenticate
 
+    rescue_from(ActionController::ParameterMissing) do |parameter_missing_exception|
+      render text: "Required parameter missing: #{parameter_missing_exception.param}", status: :bad_request
+    end
+
     protected
 
     # Authenticate the user with token based authentication

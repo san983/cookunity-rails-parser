@@ -23,6 +23,9 @@ gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'rswag'
 
+# Needed for rswag in production
+gem 'rspec'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -43,7 +46,6 @@ group :development, :test do
 
   gem 'dotenv-rails'
 
-  gem 'rspec'
   gem 'rspec-core'
   gem 'rspec-expectations'
   gem 'rspec-mocks'

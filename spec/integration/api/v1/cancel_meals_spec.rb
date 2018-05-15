@@ -15,10 +15,9 @@ describe 'Cancel Meal API' do
   let(:Authorization) { valid_auth_token }
 
   path '/api/v1/cancel_meals' do
-
     post 'Creates a cancel meal job'  do
       # tags 'Blogs'
-      security [ Token: {} ]
+      security [ Token: [] ]
       consumes 'application/json'
       parameter name: :cancel_meal, in: :body, schema: {
         type: :object,

@@ -16,13 +16,17 @@ RSpec.configure do |config|
     'v1/swagger.json' => {
       swagger: '2.0',
       info: {
-        title: 'API V1',
-        version: 'v1'
+        title: 'CookUnity API',
+        version: 'v1',
+        description: 'API for general CookUnity usage',
+        termsOfService: '-'
       },
+      host: ENV.fetch("HTTP_HOST", 'localhost'),
+      schemes: ['https'],
       paths: {},
       securityDefinitions: {
         Token: {
-          description: "...",
+          description: "Valid token for using this API",
           type: :apiKey,
           name: 'Authorization',
           in: :header

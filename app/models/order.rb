@@ -14,13 +14,13 @@ class Order < ApplicationRecord
   # We need to focus just in NY timezone for defining the "today" scope
   scope :from_today, lambda {
     Time.zone = "Eastern Time (US & Canada)"
-    where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    where(order_date: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
   }
 
   # We need to focus just in NY timezone for defining the "date" scope
   scope :from_date, lambda { |date_in_string|
     Time.zone = "Eastern Time (US & Canada)"
     date = Time.zone.parse(date_in_string)
-    where(created_at: date.beginning_of_day..date.end_of_day)
+    where(order_date: date.beginning_of_day..date.end_of_day)
   }
 end
